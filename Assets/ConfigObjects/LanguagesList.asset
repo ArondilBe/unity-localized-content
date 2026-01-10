@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LanguagesList
   m_EditorClassIdentifier: Assembly-CSharp::Language.LanguagesList
   languages:
-  - Code: FR
-    DisplayedName: "Fran\xE7ais"
-  - Code: EN
-    DisplayedName: English
+  - code: FR
+    displayedName: "Fran\xE7ais"
+  - code: EN
+    displayedName: English
