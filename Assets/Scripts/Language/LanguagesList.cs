@@ -1,28 +1,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Localization;
 using UnityEngine;
 
 namespace Language
 {
     [CreateAssetMenu(
         fileName = "LanguagesList",
-        menuName = "Scriptable Objects/Language/Languages List"
+        menuName = "Scriptable Objects/Localized Content/Languages List"
     )]
     public class LanguagesList : ScriptableObject
     {
         [SerializeField]
-        private List<Language> languages = new();
+        private List<LanguageDefinition> languages = new();
 
-        public List<Language> Languages
+        public List<LanguageDefinition> Languages
         {
             get { return languages; }
         }
 
-        public Language GetLanguage(string languageCode)
+        public LanguageDefinition GetLanguage(string languageCode)
         {
-            Language language = languages.First(language => language.Code == languageCode);
+            LanguageDefinition language = languages.First(language =>
+                language.Code == languageCode
+            );
             return language
                 ?? throw new Exception($"No language found for language code {languageCode}.");
         }
