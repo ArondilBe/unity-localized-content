@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Language
 {
     [Serializable]
-    public class Language
+    public class LanguageDefinition
     {
         [SerializeField]
         private string code;
