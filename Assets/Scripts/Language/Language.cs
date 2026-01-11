@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace TranslatedContent
+namespace Language
 {
     [Serializable]
     public class Language
