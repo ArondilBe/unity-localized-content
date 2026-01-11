@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Localization;
 using UnityEngine;
 
-namespace TranslatedContent
+namespace Language
 {
     [CreateAssetMenu(
         fileName = "LanguagesList",

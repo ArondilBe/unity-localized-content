@@ -1,2 +1,3 @@
-# unity-translated-content
-Unity package to handle translated content
+# unity-localized-content
+
+Unity package to handle localized content
