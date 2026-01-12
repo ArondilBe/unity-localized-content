@@ -118,11 +118,19 @@ namespace EditorUI
                     DisplayLocalization(languageCodes, localizationsProperty, localizationIndex);
                 }
                 DisplayLocalizationButtons(localizationsProperty);
-
+                if (GUILayout.Button("Remove Localized Entry"))
+                {
+                    localizedEntriesProperty.DeleteArrayElementAtIndex(localizedEntryIndex);
+                }
                 EditorGUILayout.EndVertical();
             }
 
-            DisplayLocalizedEntryButtons();
+            if (GUILayout.Button("Add Localized Entry"))
+            {
+                localizedEntriesProperty.InsertArrayElementAtIndex(
+                    localizedEntriesProperty.arraySize
+                );
+            }
         }
 
         void DisplayLocalization(
@@ -174,29 +182,6 @@ namespace EditorUI
                     localizationsProperty.arraySize - 1
                 );
             }
-            EditorGUILayout.EndHorizontal();
-        }
-
-        void DisplayLocalizedEntryButtons()
-        {
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Add Localized Entry"))
-            {
-                localizedEntriesProperty.InsertArrayElementAtIndex(
-                    localizedEntriesProperty.arraySize
-                );
-            }
-
-            if (
-                GUILayout.Button("Remove Localized Entry")
-                && localizedEntriesProperty.arraySize > 0
-            )
-            {
-                localizedEntriesProperty.DeleteArrayElementAtIndex(
-                    localizedEntriesProperty.arraySize - 1
-                );
-            }
-
             EditorGUILayout.EndHorizontal();
         }
     }
