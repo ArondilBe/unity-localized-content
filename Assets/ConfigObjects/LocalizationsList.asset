@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf9855cbc291d64b8fd7435bb15da01, type: 3}
   m_Name: LocalizationsList
   m_EditorClassIdentifier: Assembly-CSharp::Localization.LocalizationsList
-  languagesList: {fileID: 11400000, guid: 5c3fac50a3682e241b6e07faf9271cb0, type: 2}
+  languagesList: {fileID: 0}
   localizedEntries: []

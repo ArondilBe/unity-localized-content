@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace EditorUI
 {
     [CustomEditor(typeof(LocalizationsList))]
-    public class LocalizationsListInspector : Editor
+    public class LocalizationsListEditor : Editor
     {
         private SerializedProperty languagesListProperty;
         private SerializedProperty localizedEntriesProperty;
@@ -23,60 +23,48 @@ namespace EditorUI
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            LanguagesList languagesList = GetLinkedLanguagesList();
+            LanguagesList linkedLanguagesList = GetLinkedLanguagesList();
 
-            if (
-                languagesList == null
-                || languagesList.Languages == null
-                || languagesList.Languages.Count() == 0
-            )
+            if (!linkedLanguagesList)
             {
-                DisplayEmptyLanguagesListPropertyWarningMessage(languagesList);
-
-                serializedObject.ApplyModifiedProperties();
+                DrawNoLanguagesListWarningMessage();
                 return;
             }
 
-            string[] languageCodes = GetLanguageCodes(languagesList.Languages);
-
-            if (languageCodes.Length == 0)
+            if (linkedLanguagesList.Languages.Count == 0)
             {
-                EditorGUILayout.HelpBox(
-                    "No valid language found in the languages list.",
-                    MessageType.Warning
-                );
-                serializedObject.ApplyModifiedProperties();
+                DrawEmptyLanguagesListWarningMessage();
                 return;
             }
 
-            DisplayLocalizationEntryList(languageCodes);
+            string[] languageCodes = GetLanguageCodes(linkedLanguagesList.Languages);
+            DrawLocalizedEntriesList(languageCodes);
+
             serializedObject.ApplyModifiedProperties();
         }
 
-        public LanguagesList GetLinkedLanguagesList()
+        LanguagesList GetLinkedLanguagesList()
         {
             EditorGUILayout.PropertyField(languagesListProperty);
             return languagesListProperty.objectReferenceValue as LanguagesList;
         }
 
-        public void DisplayEmptyLanguagesListPropertyWarningMessage(LanguagesList languagesList)
+        void DrawNoLanguagesListWarningMessage()
         {
-            if (languagesList == null)
-            {
-                EditorGUILayout.HelpBox(
-                    "Assign a languages list to select languages.",
-                    MessageType.Warning
-                );
-                return;
-            }
-
-            EditorGUILayout.HelpBox(
-                "Define languages in your languages list.",
-                MessageType.Warning
-            );
+            EditorGUILayout.HelpBox("Please provide a languages list.", MessageType.Warning);
+            serializedObject.ApplyModifiedProperties();
         }
 
-        public string[] GetLanguageCodes(List<LanguageDefinition> languages)
+        void DrawEmptyLanguagesListWarningMessage()
+        {
+            EditorGUILayout.HelpBox(
+                "Please define some languages in your languages list.",
+                MessageType.Warning
+            );
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        string[] GetLanguageCodes(List<LanguageDefinition> languages)
         {
             return languages
                     .Where(language => !string.IsNullOrEmpty(language.Code))
@@ -86,46 +74,59 @@ namespace EditorUI
                 ?? new string[0];
         }
 
-        void DisplayLocalizationEntryList(string[] languageCodes)
+        void DrawLocalizedEntriesList(string[] languageCodes)
         {
             EditorGUILayout.Space(10);
-            EditorGUILayout.LabelField("Localization Entries", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Localized Entries", EditorStyles.boldLabel);
+            EditorGUILayout.BeginVertical("box");
             for (
                 int localizedEntryIndex = 0;
                 localizedEntryIndex < localizedEntriesProperty.arraySize;
                 localizedEntryIndex++
             )
             {
-                SerializedProperty localizedEntryProperty =
-                    localizedEntriesProperty.GetArrayElementAtIndex(localizedEntryIndex);
-                SerializedProperty identifierProperty = localizedEntryProperty.FindPropertyRelative(
-                    "identifier"
-                );
-                SerializedProperty localizationsProperty =
-                    localizedEntryProperty.FindPropertyRelative("localizations");
+                DrawLocalizedEntry(localizedEntryIndex, languageCodes);
+            }
+            DrawAddLocalizedEntryButton();
+            EditorGUILayout.EndVertical();
+        }
 
-                EditorGUILayout.BeginVertical("box");
+        void DrawLocalizedEntry(int localizedEntryIndex, string[] languageCodes)
+        {
+            SerializedProperty localizedEntryProperty =
+                localizedEntriesProperty.GetArrayElementAtIndex(localizedEntryIndex);
+            SerializedProperty identifierProperty = localizedEntryProperty.FindPropertyRelative(
+                "identifier"
+            );
+            SerializedProperty localizationsProperty = localizedEntryProperty.FindPropertyRelative(
+                "localizations"
+            );
 
-                EditorGUILayout.PropertyField(identifierProperty);
-                EditorGUILayout.LabelField("Localizations", EditorStyles.miniBoldLabel);
+            EditorGUILayout.BeginVertical("box");
 
-                for (
-                    int localizationIndex = 0;
-                    localizationIndex < localizationsProperty.arraySize;
-                    localizationIndex++
-                )
-                {
-                    DisplayLocalization(languageCodes, localizationsProperty, localizationIndex);
-                }
-                DisplayLocalizationButtons(localizationsProperty);
-                if (GUILayout.Button("Remove Localized Entry"))
-                {
-                    localizedEntriesProperty.DeleteArrayElementAtIndex(localizedEntryIndex);
-                }
-                EditorGUILayout.EndVertical();
+            EditorGUILayout.PropertyField(identifierProperty);
+            EditorGUILayout.LabelField("Localizations", EditorStyles.miniBoldLabel);
+            for (
+                int localizationIndex = 0;
+                localizationIndex < localizationsProperty.arraySize;
+                localizationIndex++
+            )
+            {
+                DrawLocalization(languageCodes, localizationsProperty, localizationIndex);
+            }
+            DrawAddLocalizationButton(localizationsProperty);
+
+            if (GUILayout.Button("Remove localized entry"))
+            {
+                localizedEntriesProperty.DeleteArrayElementAtIndex(localizedEntryIndex);
             }
 
-            if (GUILayout.Button("Add Localized Entry"))
+            EditorGUILayout.EndVertical();
+        }
+
+        void DrawAddLocalizedEntryButton()
+        {
+            if (GUILayout.Button("Add new localized entry"))
             {
                 localizedEntriesProperty.InsertArrayElementAtIndex(
                     localizedEntriesProperty.arraySize
@@ -133,7 +134,7 @@ namespace EditorUI
             }
         }
 
-        void DisplayLocalization(
+        void DrawLocalization(
             string[] languageCodes,
             SerializedProperty localizationsProperty,
             int localizationIndex
@@ -166,21 +167,20 @@ namespace EditorUI
             languageCodeProperty.stringValue = languageCodes[newLanguageCodeIndex];
             EditorGUILayout.PropertyField(contentProperty);
 
+            if (GUILayout.Button("Remove Localization"))
+            {
+                localizationsProperty.DeleteArrayElementAtIndex(localizationIndex);
+            }
+
             EditorGUILayout.EndVertical();
         }
 
-        void DisplayLocalizationButtons(SerializedProperty localizationsProperty)
+        void DrawAddLocalizationButton(SerializedProperty localizationsProperty)
         {
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Add Localization"))
             {
                 localizationsProperty.InsertArrayElementAtIndex(localizationsProperty.arraySize);
-            }
-            if (GUILayout.Button("Remove Localization") && localizationsProperty.arraySize > 0)
-            {
-                localizationsProperty.DeleteArrayElementAtIndex(
-                    localizationsProperty.arraySize - 1
-                );
             }
             EditorGUILayout.EndHorizontal();
         }
