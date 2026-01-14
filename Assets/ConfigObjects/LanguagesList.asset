@@ -12,12 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f6441fe4c94c84fac2202d41e06a27, type: 3}
   m_Name: LanguagesList
   m_EditorClassIdentifier: Assembly-CSharp::Language.LanguagesList
-  languages:
-  - code: FR
-    displayedName: "Fran\xE7ais"
-    readingDirection: 0
-    linkedUnityLanguage: 14
-  - code: EN
-    displayedName: English
-    readingDirection: 0
-    linkedUnityLanguage: 10
+  languages: []
