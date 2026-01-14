@@ -104,6 +104,16 @@ namespace EditorUI
 
             EditorGUILayout.BeginVertical("box");
 
+            EditorGUILayout.BeginHorizontal();
+            GUIContent deleteIcon = EditorGUIUtility.IconContent("TreeEditor.Trash");
+
+            if (GUILayout.Button(deleteIcon, GUIStyle.none))
+            {
+                localizedEntriesProperty.DeleteArrayElementAtIndex(localizedEntryIndex);
+                return;
+            }
+            EditorGUILayout.EndHorizontal();
+
             EditorGUILayout.PropertyField(identifierProperty);
             EditorGUILayout.LabelField("Localizations", EditorStyles.miniBoldLabel);
             for (
@@ -115,12 +125,6 @@ namespace EditorUI
                 DrawLocalization(languageCodes, localizationsProperty, localizationIndex);
             }
             DrawAddLocalizationButton(localizationsProperty);
-
-            if (GUILayout.Button("Remove localized entry"))
-            {
-                localizedEntriesProperty.DeleteArrayElementAtIndex(localizedEntryIndex);
-            }
-
             EditorGUILayout.EndVertical();
         }
 
@@ -153,6 +157,16 @@ namespace EditorUI
 
             EditorGUILayout.BeginVertical("helpbox");
 
+            EditorGUILayout.BeginHorizontal();
+            GUIContent deleteIcon = EditorGUIUtility.IconContent("TreeEditor.Trash");
+
+            if (GUILayout.Button(deleteIcon, GUIStyle.none))
+            {
+                localizationsProperty.DeleteArrayElementAtIndex(localizationIndex);
+                return;
+            }
+            EditorGUILayout.EndHorizontal();
+
             int currentLanguageCodeIndex = Mathf.Max(
                 0,
                 System.Array.IndexOf(languageCodes, languageCodeProperty.stringValue)
@@ -166,11 +180,6 @@ namespace EditorUI
 
             languageCodeProperty.stringValue = languageCodes[newLanguageCodeIndex];
             EditorGUILayout.PropertyField(contentProperty);
-
-            if (GUILayout.Button("Remove Localization"))
-            {
-                localizationsProperty.DeleteArrayElementAtIndex(localizationIndex);
-            }
 
             EditorGUILayout.EndVertical();
         }
