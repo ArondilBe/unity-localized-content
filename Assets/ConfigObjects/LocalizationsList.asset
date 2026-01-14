@@ -13,4 +13,14 @@ MonoBehaviour:
   m_Name: LocalizationsList
   m_EditorClassIdentifier: Assembly-CSharp::Localization.LocalizationsList
   languagesList: {fileID: 11400000, guid: 5c3fac50a3682e241b6e07faf9271cb0, type: 2}
-  localizedEntries: []
+  localizedEntries:
+  - identifier: TestId
+    localizations:
+    - languageCode: FR
+      content: FrenchContent
+    - languageCode: EN
+      content: EnglishContent
+  - identifier: MissingTestId
+    localizations:
+    - languageCode: FR
+      content: FrenchContent

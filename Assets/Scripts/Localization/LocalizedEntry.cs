@@ -21,13 +21,19 @@ namespace Localization
 
         public string GetLocalizedContent(string languageCode)
         {
-            LocalizedString localizedString = localizations.First(localization =>
-                localization.LanguageCode == languageCode
-            );
-            return localizedString.Content
-                ?? throw new Exception(
+            try
+            {
+                LocalizedString localizedString = localizations.First(localization =>
+                    localization.LanguageCode == languageCode
+                );
+                return localizedString.Content;
+            }
+            catch
+            {
+                throw new Exception(
                     $"No localized content found for the element {identifier} for the language code {languageCode}."
                 );
+            }
         }
     }
 }
