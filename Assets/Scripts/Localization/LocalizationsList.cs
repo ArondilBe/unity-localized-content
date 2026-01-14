@@ -41,5 +41,11 @@ namespace Localization
                 throw new Exception($"No localized entry found with identifier {identifier}.");
             }
         }
+
+        public string GetLocalizedEntrySting(string identifier, string languageCode)
+        {
+            languagesList.GetLanguage(languageCode);
+            return GetLocalizedEntry(identifier).GetLocalizedContent(languageCode);
+        }
     }
 }

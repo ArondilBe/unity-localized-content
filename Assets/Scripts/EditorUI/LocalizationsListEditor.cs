@@ -38,6 +38,13 @@ namespace EditorUI
             }
 
             string[] languageCodes = GetLanguageCodes(linkedLanguagesList.Languages);
+
+            if (languageCodes.Length == 0)
+            {
+                DrawNoValidLanguageWarningMessage();
+                return;
+            }
+
             DrawLocalizedEntriesList(languageCodes);
 
             serializedObject.ApplyModifiedProperties();
@@ -59,6 +66,15 @@ namespace EditorUI
         {
             EditorGUILayout.HelpBox(
                 "Please define some languages in your languages list.",
+                MessageType.Warning
+            );
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        void DrawNoValidLanguageWarningMessage()
+        {
+            EditorGUILayout.HelpBox(
+                "Please define at least a valid language.",
                 MessageType.Warning
             );
             serializedObject.ApplyModifiedProperties();
