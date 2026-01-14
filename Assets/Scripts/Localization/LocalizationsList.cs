@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Language;
 using UnityEngine;
 
@@ -24,6 +26,20 @@ namespace Localization
         public LanguagesList LanguagesLists
         {
             get { return languagesList; }
+        }
+
+        public LocalizedEntry GetLocalizedEntry(string identifier)
+        {
+            try
+            {
+                return LocalizedEntries.First(localizedEntry =>
+                    localizedEntry.Identifier == identifier
+                );
+            }
+            catch
+            {
+                throw new Exception($"No localized entry found with identifier {identifier}.");
+            }
         }
     }
 }
