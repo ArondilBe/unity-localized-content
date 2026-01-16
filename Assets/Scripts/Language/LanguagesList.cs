@@ -21,11 +21,14 @@ namespace Language
 
         public LanguageDefinition GetLanguage(string languageCode)
         {
-            LanguageDefinition language = languages.First(language =>
-                language.Code == languageCode
-            );
-            return language
-                ?? throw new Exception($"No language found for language code {languageCode}.");
+            try
+            {
+                return languages.First(language => language.Code == languageCode);
+            }
+            catch
+            {
+                throw new Exception($"No language found for language code {languageCode}.");
+            }
         }
     }
 }

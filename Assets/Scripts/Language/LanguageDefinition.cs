@@ -37,6 +37,19 @@ namespace Language
         {
             get { return linkedUnityLanguage; }
         }
+
+        public LanguageDefinition(
+            string code,
+            string displayedName,
+            EReadingDirection readingDirection,
+            SystemLanguage linkedUnityLanguage
+        )
+        {
+            this.code = code;
+            this.displayedName = displayedName;
+            this.readingDirection = readingDirection;
+            this.linkedUnityLanguage = linkedUnityLanguage;
+        }
     }
 
     public enum EReadingDirection
