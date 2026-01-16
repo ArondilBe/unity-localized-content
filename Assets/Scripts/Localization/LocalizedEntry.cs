@@ -19,6 +19,23 @@ namespace Localization
             get { return identifier; }
         }
 
+        public List<LocalizedString> Localizations
+        {
+            get { return localizations; }
+        }
+
+        public LocalizedEntry(string identifier, List<LocalizedString> localizations)
+        {
+            this.identifier = identifier;
+            this.localizations = localizations;
+        }
+
+        public LocalizedEntry(string identifier)
+        {
+            this.identifier = identifier;
+            this.localizations = new();
+        }
+
         public string GetLocalizedContent(string languageCode)
         {
             try

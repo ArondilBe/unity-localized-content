@@ -22,5 +22,11 @@ namespace Localization
         {
             get { return content; }
         }
+
+        public LocalizedString(string languageCode, string content)
+        {
+            this.languageCode = languageCode;
+            this.content = content;
+        }
     }
 }
