@@ -10,6 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66f6441fe4c94c84fac2202d41e06a27, type: 3}
-  m_Name: LanguagesList
+  m_Name: ExampleLanguagesList
   m_EditorClassIdentifier: Assembly-CSharp::Language.LanguagesList
-  languages: []
+  languages:
+  - code: FR
+    displayedName: "Fran\xE7ais"
+    readingDirection: 0
+    linkedUnityLanguage: 14
