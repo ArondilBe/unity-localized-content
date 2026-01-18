@@ -1,0 +1,59 @@
+using System;
+using UI;
+using UnityEngine;
+
+namespace Localization
+{
+    public class LocalizationManager : MonoBehaviour
+    {
+        private static LocalizationManager instance;
+
+        [SerializeField]
+        private LocalizationsList localizationsList;
+
+        [SerializeField]
+        private string currentLanguageCode;
+
+        public static LocalizationManager Instance => instance;
+
+        void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+
+            LoadLocalizationContent();
+        }
+
+        private void LoadLocalizationContent()
+        {
+            LocalizedText[] localizedTexts = FindObjectsByType<LocalizedText>(
+                FindObjectsSortMode.None
+            );
+
+            foreach (LocalizedText localizedText in localizedTexts)
+            {
+                try
+                {
+                    localizedText.SetText(
+                        localizationsList
+                            .GetLocalizedEntry(localizedText.Identifier)
+                            .GetLocalizedContent(currentLanguageCode)
+                    );
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogWarning(
+                        $"Error loading localization for text element: {exception.Message}"
+                    );
+                }
+            }
+        }
+    }
+}

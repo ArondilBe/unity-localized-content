@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Localization.LocalizationsList
   languagesList: {fileID: 11400000, guid: 5c3fac50a3682e241b6e07faf9271cb0, type: 2}
   localizedEntries:
-  - identifier: 
-    localizations: []
+  - identifier: Example
+    localizations:
+    - languageCode: FR
+      content: "Exemple en fran\xE7ais"
+    - languageCode: EN
+      content: English example
