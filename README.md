@@ -4,6 +4,9 @@
   - [About this package](#about-this-package)
   - [The languages list](#the-languages-list)
   - [The localizations list](#the-localizations-list)
+  - [The localization manager](#the-localization-manager)
+    - [LocalizedTextUI](#localizedtextui)
+    - [LocalizedText](#localizedtext)
   - [Example objects](#example-objects)
   - [Prefabs](#prefabs)
 
@@ -39,6 +42,22 @@ A **Localized Entry** is composed of a **Identifier** used to find it and of a l
 The localizations list contains a function named **GetLocalizedEntry** which takes a **identifier** (of type **string**) and which returns a **localized entry** if found or throws an error if not.
 
 Each localized entry contains a function named **GetLocalizedContent** which takes a **language code** (of type **string**) and which returns the **localized content** (of type **string**) if found or throws an error if not.
+
+## The localization manager
+
+Once you'll have your localizations list define, you can add a **localization manager** to your scene. This gameobject will persist between scenes.
+
+The **localization manager** is composed of a **localizations list** and of a **current language**. The latest is based on the values defined in the **languages list** linked to its **localizations list**.
+
+When **awaken** the localization manager will call it's function **LoadLocalizationContent** which will find all instance of **LocalizedTextUI** and **LocalizedText** to set the localized content.
+
+### LocalizedTextUI
+
+The **LocalizedTextUI** component is a script which can be attached to any **UI** element to load it's localized text (working with **TextMeshProUGUI**). It's composed of a **Identifier**, used to find the right localized entry and of a **TextMeshProUGUI** which will receive the localized text.
+
+### LocalizedText
+
+The **LocalizedTextUI** component is a script which can be attached to any **non UI** element to load it's localized text. It's composed of a **Identifier**, used to find the right localized entry and of a **string** which will receive the localized text.
 
 ## Example objects
 

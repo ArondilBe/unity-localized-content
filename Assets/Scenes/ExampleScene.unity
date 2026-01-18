@@ -526,7 +526,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3027390207167257638
+--- !u!1001 &1982317229
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -537,6 +537,18 @@ PrefabInstance:
     - target: {fileID: 979923169763116060, guid: 7c820f9c4925e57438cea3c0707e0d05, type: 3}
       propertyPath: m_Name
       value: LocalizationManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3695578182203253143, guid: 7c820f9c4925e57438cea3c0707e0d05, type: 3}
+      propertyPath: currentLanguage.code
+      value: EN
+      objectReference: {fileID: 0}
+    - target: {fileID: 3695578182203253143, guid: 7c820f9c4925e57438cea3c0707e0d05, type: 3}
+      propertyPath: currentLanguage.displayedName
+      value: English
+      objectReference: {fileID: 0}
+    - target: {fileID: 3695578182203253143, guid: 7c820f9c4925e57438cea3c0707e0d05, type: 3}
+      propertyPath: currentLanguage.linkedUnityLanguage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7624583148076127882, guid: 7c820f9c4925e57438cea3c0707e0d05, type: 3}
       propertyPath: m_LocalPosition.x
@@ -744,6 +756,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1791063883}
-  - {fileID: 3027390207167257638}
   - {fileID: 918665575}
   - {fileID: 7264387080308059128}
+  - {fileID: 1982317229}

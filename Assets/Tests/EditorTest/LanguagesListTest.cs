@@ -12,9 +12,6 @@ namespace Test
         public void SetUp()
         {
             languagesList = ScriptableObject.CreateInstance<LanguagesList>();
-            languagesList.Languages.Add(
-                new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
-            );
         }
 
         [TearDown]
@@ -26,16 +23,52 @@ namespace Test
         [Test]
         public void GetLanguageValueFound()
         {
+            languagesList.Languages.Add(
+                new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
+            );
             Assert.AreSame(languagesList.GetLanguage("FR"), languagesList.Languages[0]);
         }
 
         [Test]
         public void GetLanguageValueNotFound()
         {
+            languagesList.Languages.Add(
+                new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
+            );
             Assert.Throws<System.Exception>(() =>
             {
                 languagesList.GetLanguage("EN");
             });
+        }
+
+        [Test]
+        public void GetLanguageCodesLanguagesFound()
+        {
+            languagesList.Languages.Add(
+                new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
+            );
+            Assert.AreEqual(new string[] { "FR" }, languagesList.GetLanguageCodes());
+        }
+
+        [Test]
+        public void GetLanguageCodesNoLanguageFound()
+        {
+            Assert.AreEqual(new string[] { }, languagesList.GetLanguageCodes());
+        }
+
+        [Test]
+        public void GetLanguageDisplayedNamesLanguagesFound()
+        {
+            languagesList.Languages.Add(
+                new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
+            );
+            Assert.AreEqual(new string[] { "Français" }, languagesList.GetLanguageDisplayedNames());
+        }
+
+        [Test]
+        public void GetLanguageDisplayedNamesNoLanguageFound()
+        {
+            Assert.AreEqual(new string[] { }, languagesList.GetLanguageDisplayedNames());
         }
     }
 }
