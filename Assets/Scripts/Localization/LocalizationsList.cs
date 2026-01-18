@@ -18,15 +18,9 @@ namespace Localization
         [SerializeField]
         private List<LocalizedEntry> localizedEntries = new();
 
-        public List<LocalizedEntry> LocalizedEntries
-        {
-            get { return localizedEntries; }
-        }
+        public List<LocalizedEntry> LocalizedEntries => localizedEntries;
 
-        public LanguagesList LanguagesLists
-        {
-            get { return languagesList; }
-        }
+        public LanguagesList LanguagesLists => languagesList;
 
         public LocalizedEntry GetLocalizedEntry(string identifier)
         {

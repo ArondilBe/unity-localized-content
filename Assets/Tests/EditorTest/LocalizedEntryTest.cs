@@ -1,7 +1,5 @@
-using System.Collections;
 using Localization;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace Test
 {

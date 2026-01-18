@@ -14,10 +14,7 @@ namespace Language
         [SerializeField]
         private List<LanguageDefinition> languages = new();
 
-        public List<LanguageDefinition> Languages
-        {
-            get { return languages; }
-        }
+        public List<LanguageDefinition> Languages => languages;
 
         public LanguageDefinition GetLanguage(string languageCode)
         {
