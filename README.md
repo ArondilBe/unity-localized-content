@@ -5,6 +5,7 @@
   - [The languages list](#the-languages-list)
   - [The localizations list](#the-localizations-list)
   - [Example objects](#example-objects)
+  - [Prefabs](#prefabs)
 
 ## About this package
 
@@ -41,4 +42,8 @@ Each localized entry contains a function named **GetLocalizedContent** which tak
 
 ## Example objects
 
-In the **ConfigObjects** of this package you'll find an example object for the **languages list** and for the **localizations list**
+In the **ConfigObjects** of this package you'll find an example object for the **languages list** and for the **localizations list**. You can also find an examples for a **localization loading** on scene in the folder **Scenes**.
+
+## Prefabs
+
+You can find prefabs for a **localization manager** and for a **localized button** in the **Prefabs** folder.

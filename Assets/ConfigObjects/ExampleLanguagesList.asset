@@ -17,3 +17,7 @@ MonoBehaviour:
     displayedName: "Fran\xE7ais"
     readingDirection: 0
     linkedUnityLanguage: 14
+  - code: EN
+    displayedName: English
+    readingDirection: 0
+    linkedUnityLanguage: 10
