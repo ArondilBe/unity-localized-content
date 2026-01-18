@@ -1,4 +1,5 @@
 using System;
+using Language;
 using UI;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Localization
         private LocalizationsList localizationsList;
 
         [SerializeField]
-        private string currentLanguageCode;
+        private LanguageDefinition currentLanguage;
 
         public static LocalizationManager Instance => instance;
 
@@ -48,7 +49,7 @@ namespace Localization
                     localizedTextUI.SetText(
                         localizationsList
                             .GetLocalizedEntry(localizedTextUI.Identifier)
-                            .GetLocalizedContent(currentLanguageCode)
+                            .GetLocalizedContent(currentLanguage.Code)
                     );
                 }
                 catch (Exception exception)
@@ -66,7 +67,7 @@ namespace Localization
                     localizedText.SetText(
                         localizationsList
                             .GetLocalizedEntry(localizedText.Identifier)
-                            .GetLocalizedContent(currentLanguageCode)
+                            .GetLocalizedContent(currentLanguage.Code)
                     );
                 }
                 catch (Exception exception)

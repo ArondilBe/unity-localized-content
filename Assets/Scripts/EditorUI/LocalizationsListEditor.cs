@@ -1,10 +1,8 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
-using System.Linq;
 using Localization;
 using Language;
-using System.Collections.Generic;
 
 namespace EditorUI
 {
@@ -37,7 +35,7 @@ namespace EditorUI
                 return;
             }
 
-            string[] languageCodes = GetLanguageCodes(linkedLanguagesList.Languages);
+            string[] languageCodes = linkedLanguagesList.GetLanguageCodes();
 
             if (languageCodes.Length == 0)
             {
@@ -78,16 +76,6 @@ namespace EditorUI
                 MessageType.Warning
             );
             serializedObject.ApplyModifiedProperties();
-        }
-
-        string[] GetLanguageCodes(List<LanguageDefinition> languages)
-        {
-            return languages
-                    .Where(language => !string.IsNullOrEmpty(language.Code))
-                    .Select(language => language.Code)
-                    .Distinct()
-                    .ToArray()
-                ?? new string[0];
         }
 
         void DrawLocalizedEntriesList(string[] languageCodes)
