@@ -1,4 +1,3 @@
-using System.Collections;
 using Localization;
 using NUnit.Framework;
 using UnityEngine;

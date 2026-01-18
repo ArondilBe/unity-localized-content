@@ -13,15 +13,9 @@ namespace Localization
         [TextArea]
         private string content;
 
-        public string LanguageCode
-        {
-            get { return languageCode; }
-        }
+        public string LanguageCode => languageCode;
 
-        public string Content
-        {
-            get { return content; }
-        }
+        public string Content => content;
 
         public LocalizedString(string languageCode, string content)
         {

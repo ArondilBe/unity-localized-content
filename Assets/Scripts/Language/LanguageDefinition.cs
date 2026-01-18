@@ -18,25 +18,13 @@ namespace Language
         [SerializeField]
         private SystemLanguage linkedUnityLanguage;
 
-        public string Code
-        {
-            get { return code; }
-        }
+        public string Code => code;
 
-        public string DisplayedName
-        {
-            get { return displayedName; }
-        }
+        public string DisplayedName => displayedName;
 
-        public EReadingDirection ReadingDirection
-        {
-            get { return readingDirection; }
-        }
+        public EReadingDirection ReadingDirection => readingDirection;
 
-        public SystemLanguage LinkedUnityLanguage
-        {
-            get { return linkedUnityLanguage; }
-        }
+        public SystemLanguage LinkedUnityLanguage => linkedUnityLanguage;
 
         public LanguageDefinition(
             string code,

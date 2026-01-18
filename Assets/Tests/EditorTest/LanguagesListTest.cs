@@ -1,4 +1,3 @@
-using System.Collections;
 using Language;
 using NUnit.Framework;
 using UnityEngine;

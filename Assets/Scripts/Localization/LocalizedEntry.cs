@@ -14,15 +14,9 @@ namespace Localization
         [SerializeField]
         private List<LocalizedString> localizations = new();
 
-        public string Identifier
-        {
-            get { return identifier; }
-        }
+        public string Identifier => identifier;
 
-        public List<LocalizedString> Localizations
-        {
-            get { return localizations; }
-        }
+        public List<LocalizedString> Localizations => localizations;
 
         public LocalizedEntry(string identifier, List<LocalizedString> localizations)
         {
