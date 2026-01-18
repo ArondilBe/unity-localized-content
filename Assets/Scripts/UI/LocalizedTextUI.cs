@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class LocalizedText : MonoBehaviour
+    public class LocalizedTextUI : MonoBehaviour
     {
         [SerializeField]
         private string identifier;

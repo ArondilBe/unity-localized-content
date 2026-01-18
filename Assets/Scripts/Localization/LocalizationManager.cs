@@ -33,9 +33,31 @@ namespace Localization
 
         private void LoadLocalizationContent()
         {
+            LocalizedTextUI[] localizedTextUIs = FindObjectsByType<LocalizedTextUI>(
+                FindObjectsSortMode.None
+            );
+
             LocalizedText[] localizedTexts = FindObjectsByType<LocalizedText>(
                 FindObjectsSortMode.None
             );
+
+            foreach (LocalizedTextUI localizedTextUI in localizedTextUIs)
+            {
+                try
+                {
+                    localizedTextUI.SetText(
+                        localizationsList
+                            .GetLocalizedEntry(localizedTextUI.Identifier)
+                            .GetLocalizedContent(currentLanguageCode)
+                    );
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogWarning(
+                        $"Error loading localization for text ui element: {exception.Message}"
+                    );
+                }
+            }
 
             foreach (LocalizedText localizedText in localizedTexts)
             {

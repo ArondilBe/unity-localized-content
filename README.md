@@ -46,4 +46,4 @@ In the **ConfigObjects** of this package you'll find an example object for the *
 
 ## Prefabs
 
-You can find prefabs for a **localization manager** and for a **localized button** in the **Prefabs** folder.
+You can find prefabs for a **localization manager**, **localized element**, and for a **localized button** in the **Prefabs** folder.

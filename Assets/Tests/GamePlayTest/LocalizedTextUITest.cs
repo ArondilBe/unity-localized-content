@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace Test
 {
-    public class LocalizedTextTest
+    public class LocalizedTextUITest
     {
-        private LocalizedText localizedText;
+        private LocalizedTextUI localizedTextUI;
 
         [SetUp]
         public void SetUp()
         {
             GameObject gameObject = new GameObject("localized");
-            localizedText = gameObject.AddComponent<LocalizedText>();
+            localizedTextUI = gameObject.AddComponent<LocalizedTextUI>();
         }
 
         [Test]
@@ -20,29 +20,29 @@ namespace Test
         {
             Assert.Throws<System.Exception>(() =>
             {
-                localizedText.SetText("Text");
+                localizedTextUI.SetText("Text");
             });
         }
 
         [Test]
         public void SetTextWithTextComponent()
         {
-            localizedText.TextComponent = new GameObject(
+            localizedTextUI.TextComponent = new GameObject(
                 "text"
             ).AddComponent<TMPro.TextMeshProUGUI>();
             Assert.DoesNotThrow(() =>
             {
-                localizedText.SetText("Text");
+                localizedTextUI.SetText("Text");
             });
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (localizedText != null)
+            if (localizedTextUI != null)
             {
-                Object.DestroyImmediate(localizedText.gameObject);
-                localizedText = null;
+                Object.DestroyImmediate(localizedTextUI.gameObject);
+                localizedTextUI = null;
             }
         }
     }
