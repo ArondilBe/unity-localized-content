@@ -7,6 +7,7 @@
   - [The localization manager](#the-localization-manager)
     - [LocalizedTextUI](#localizedtextui)
     - [LocalizedText](#localizedtext)
+    - [LanguagesDropdown](#languagesdropdown)
   - [Example objects](#example-objects)
   - [Prefabs](#prefabs)
 
@@ -51,6 +52,8 @@ The **localization manager** is composed of a **localizations list** and of a **
 
 When **awaken** the localization manager will call it's function **LoadLocalizationContent** which will find all instance of **LocalizedTextUI** and **LocalizedText** to set the localized content.
 
+If a **LanguagesDropdown** is defined the localization manager will load the languages **displayed name** into it. When the value of dropdown changes, the localized content is reloaded.
+
 ### LocalizedTextUI
 
 The **LocalizedTextUI** component is a script which can be attached to any **UI** element to load it's localized text (working with **TextMeshProUGUI**). It's composed of a **Identifier**, used to find the right localized entry and of a **TextMeshProUGUI** which will receive the localized text.
@@ -59,10 +62,14 @@ The **LocalizedTextUI** component is a script which can be attached to any **UI*
 
 The **LocalizedTextUI** component is a script which can be attached to any **non UI** element to load it's localized text. It's composed of a **Identifier**, used to find the right localized entry and of a **string** which will receive the localized text.
 
+### LanguagesDropdown
+
+The **LanguagesDropdown** component is a script which will handle the language's change. It's composed of a **TMP_Dropdown** which will contain the languages displayed named (loaded by the **localization manager**) and of a **selected language** which is the current value of the dropdown.
+
 ## Example objects
 
 In the **ConfigObjects** of this package you'll find an example object for the **languages list** and for the **localizations list**. You can also find an examples for a **localization loading** on scene in the folder **Scenes**.
 
 ## Prefabs
 
-You can find prefabs for a **localization manager**, **localized element**, and for a **localized button** in the **Prefabs** folder.
+You can find prefabs for all defined elements in the **Prefabs** folder.

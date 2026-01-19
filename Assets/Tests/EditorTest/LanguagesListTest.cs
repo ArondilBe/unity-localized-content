@@ -21,23 +21,50 @@ namespace Test
         }
 
         [Test]
-        public void GetLanguageValueFound()
+        public void GetLanguageBasedOnLanguageCodeValueFound()
         {
             languagesList.Languages.Add(
                 new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
             );
-            Assert.AreSame(languagesList.GetLanguage("FR"), languagesList.Languages[0]);
+            Assert.AreSame(
+                languagesList.GetLanguageBasedOnLanguageCode("FR"),
+                languagesList.Languages[0]
+            );
         }
 
         [Test]
-        public void GetLanguageValueNotFound()
+        public void GetLanguageBasedOnLanguageCodeValueNotFound()
         {
             languagesList.Languages.Add(
                 new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
             );
             Assert.Throws<System.Exception>(() =>
             {
-                languagesList.GetLanguage("EN");
+                languagesList.GetLanguageBasedOnLanguageCode("EN");
+            });
+        }
+
+        [Test]
+        public void GetLanguageBasedOnDisplayedNameValueFound()
+        {
+            languagesList.Languages.Add(
+                new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
+            );
+            Assert.AreSame(
+                languagesList.GetLanguageBasedOnDisplayedName("Français"),
+                languagesList.Languages[0]
+            );
+        }
+
+        [Test]
+        public void GetLanguageBasedOnDisplayedNameValueNotFound()
+        {
+            languagesList.Languages.Add(
+                new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
+            );
+            Assert.Throws<System.Exception>(() =>
+            {
+                languagesList.GetLanguageBasedOnDisplayedName("English");
             });
         }
 

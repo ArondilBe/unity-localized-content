@@ -4,6 +4,7 @@ using UnityEngine;
 using Localization;
 using Language;
 using System;
+using UI;
 
 namespace EditorUI
 {
@@ -11,11 +12,13 @@ namespace EditorUI
     public class LocalizationManagerEditor : Editor
     {
         private SerializedProperty localizationsListProperty;
+        private SerializedProperty languagesDropdownProperty;
         private SerializedProperty currentLanguageProperty;
 
         void OnEnable()
         {
             localizationsListProperty = serializedObject.FindProperty("localizationsList");
+            languagesDropdownProperty = serializedObject.FindProperty("languagesDropdown");
             currentLanguageProperty = serializedObject.FindProperty("currentLanguage");
         }
 
@@ -24,6 +27,7 @@ namespace EditorUI
             serializedObject.Update();
 
             LocalizationsList linkedLocalizationsList = GetLinkedLocalizationsList();
+            GetLinkedLanguagesDropdown();
 
             if (!linkedLocalizationsList)
             {
@@ -62,6 +66,12 @@ namespace EditorUI
         {
             EditorGUILayout.PropertyField(localizationsListProperty);
             return localizationsListProperty.objectReferenceValue as LocalizationsList;
+        }
+
+        LanguagesDropdown GetLinkedLanguagesDropdown()
+        {
+            EditorGUILayout.PropertyField(languagesDropdownProperty);
+            return languagesDropdownProperty.objectReferenceValue as LanguagesDropdown;
         }
 
         void DrawNoLocalizationsListWarningMessage()
