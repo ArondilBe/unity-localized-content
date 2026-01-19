@@ -13,13 +13,13 @@ namespace EditorUI
     {
         private SerializedProperty localizationsListProperty;
         private SerializedProperty languagesDropdownProperty;
-        private SerializedProperty currentLanguageProperty;
+        private SerializedProperty fallbackLanguageProperty;
 
         void OnEnable()
         {
             localizationsListProperty = serializedObject.FindProperty("localizationsList");
             languagesDropdownProperty = serializedObject.FindProperty("languagesDropdown");
-            currentLanguageProperty = serializedObject.FindProperty("currentLanguage");
+            fallbackLanguageProperty = serializedObject.FindProperty("fallbackLanguage");
         }
 
         public override void OnInspectorGUI()
@@ -112,39 +112,39 @@ namespace EditorUI
             System.Collections.Generic.List<LanguageDefinition> languages
         )
         {
-            string currentDisplayedName = "";
-            SerializedProperty displayedNameProp = currentLanguageProperty.FindPropertyRelative(
+            string fallbackDisplayedName = "";
+            SerializedProperty displayedNameProp = fallbackLanguageProperty.FindPropertyRelative(
                 "displayedName"
             );
             if (displayedNameProp != null)
             {
-                currentDisplayedName = displayedNameProp.stringValue;
+                fallbackDisplayedName = displayedNameProp.stringValue;
             }
 
-            int currentLanguageIndex = Mathf.Max(
+            int fallbackLanguageIndex = Mathf.Max(
                 0,
-                Array.IndexOf(languageDisplayedNames, currentDisplayedName)
+                Array.IndexOf(languageDisplayedNames, fallbackDisplayedName)
             );
 
             int selectedLanguageIndex = EditorGUILayout.Popup(
-                "Current Language",
-                currentLanguageIndex,
+                "Fallback Language",
+                fallbackLanguageIndex,
                 languageDisplayedNames
             );
 
-            if (selectedLanguageIndex != currentLanguageIndex)
+            if (selectedLanguageIndex != fallbackLanguageIndex)
             {
                 LanguageDefinition selectedLanguage = languages[selectedLanguageIndex];
 
-                SerializedProperty codeProperty = currentLanguageProperty.FindPropertyRelative(
+                SerializedProperty codeProperty = fallbackLanguageProperty.FindPropertyRelative(
                     "code"
                 );
                 SerializedProperty displayedNameProperty =
-                    currentLanguageProperty.FindPropertyRelative("displayedName");
+                    fallbackLanguageProperty.FindPropertyRelative("displayedName");
                 SerializedProperty readingDirectionProperty =
-                    currentLanguageProperty.FindPropertyRelative("readingDirection");
+                    fallbackLanguageProperty.FindPropertyRelative("readingDirection");
                 SerializedProperty linkedUnityLanguageProperty =
-                    currentLanguageProperty.FindPropertyRelative("linkedUnityLanguage");
+                    fallbackLanguageProperty.FindPropertyRelative("linkedUnityLanguage");
 
                 codeProperty.stringValue = selectedLanguage.Code;
                 displayedNameProperty.stringValue = selectedLanguage.DisplayedName;

@@ -59,5 +59,21 @@ namespace Language
                 throw new Exception($"No language found for displayed name {displayedName}.");
             }
         }
+
+        public LanguageDefinition GetLanguageBasedOnLinkedUnityLanguage(
+            SystemLanguage systemLanguage
+        )
+        {
+            try
+            {
+                return languages.First(language => language.LinkedUnityLanguage == systemLanguage);
+            }
+            catch
+            {
+                throw new Exception(
+                    $"No language found for displayed name {systemLanguage.ToString()}."
+                );
+            }
+        }
     }
 }

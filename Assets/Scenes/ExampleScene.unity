@@ -559,6 +559,18 @@ PrefabInstance:
       propertyPath: languagesDropdown
       value: 
       objectReference: {fileID: 1798690598}
+    - target: {fileID: 3695578182203253143, guid: 7c820f9c4925e57438cea3c0707e0d05, type: 3}
+      propertyPath: fallbackLanguage.code
+      value: EN
+      objectReference: {fileID: 0}
+    - target: {fileID: 3695578182203253143, guid: 7c820f9c4925e57438cea3c0707e0d05, type: 3}
+      propertyPath: fallbackLanguage.displayedName
+      value: English
+      objectReference: {fileID: 0}
+    - target: {fileID: 3695578182203253143, guid: 7c820f9c4925e57438cea3c0707e0d05, type: 3}
+      propertyPath: fallbackLanguage.linkedUnityLanguage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7624583148076127882, guid: 7c820f9c4925e57438cea3c0707e0d05, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.92739

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -22,6 +23,20 @@ namespace UI
         public void OnLanguageChanged()
         {
             selectedLanguage = languageDropdown.options[languageDropdown.value].text;
+        }
+
+        public void SetSelectedLanguage(string language)
+        {
+            int index = languageDropdown.options.FindIndex(option => option.text == language);
+            if (index > -1)
+            {
+                languageDropdown.value = index;
+                selectedLanguage = language;
+            }
+            else
+            {
+                throw new Exception($"Language {language} not found in dropdown options.");
+            }
         }
     }
 }

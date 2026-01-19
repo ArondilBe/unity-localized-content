@@ -20,6 +20,9 @@ namespace Localization
         [SerializeField]
         private LanguagesDropdown languagesDropdown;
 
+        [SerializeField]
+        private LanguageDefinition fallbackLanguage;
+
         void Awake()
         {
             if (instance == null)
@@ -32,11 +35,31 @@ namespace Localization
                 Destroy(gameObject);
             }
 
-            LoadLocalizationContent();
             if (languagesDropdown)
             {
                 LoadLanguagesOptionsInDropdown();
             }
+
+            try
+            {
+                currentLanguage =
+                    localizationsList.LanguagesLists.GetLanguageBasedOnLinkedUnityLanguage(
+                        Application.systemLanguage
+                    );
+            }
+            catch
+            {
+                Debug.LogWarning(
+                    $"Default language for system language {Application.systemLanguage} not found in languages list. Falling back to {fallbackLanguage.DisplayedName}."
+                );
+                currentLanguage = fallbackLanguage;
+                if (languagesDropdown)
+                {
+                    languagesDropdown.SetSelectedLanguage(currentLanguage.DisplayedName);
+                }
+            }
+
+            LoadLocalizationContent();
         }
 
         void Update()
