@@ -54,6 +54,8 @@ When **awaken** the localization manager will call it's function **LoadLocalizat
 
 If a **LanguagesDropdown** is defined the localization manager will load the languages **displayed name** into it. When the value of dropdown changes, the localized content is reloaded.
 
+The localization manager is also configured to set the app's language as the default one. A fallback language can also be configured to be applied if the app's language is not defined in the languages list.
+
 ### LocalizedTextUI
 
 The **LocalizedTextUI** component is a script which can be attached to any **UI** element to load it's localized text (working with **TextMeshProUGUI**). It's composed of a **Identifier**, used to find the right localized entry and of a **TextMeshProUGUI** which will receive the localized text.
