@@ -36,7 +36,7 @@ namespace Language
                 ?? new string[0];
         }
 
-        public LanguageDefinition GetLanguage(string languageCode)
+        public LanguageDefinition GetLanguageBasedOnLanguageCode(string languageCode)
         {
             try
             {
@@ -45,6 +45,18 @@ namespace Language
             catch
             {
                 throw new Exception($"No language found for language code {languageCode}.");
+            }
+        }
+
+        public LanguageDefinition GetLanguageBasedOnDisplayedName(string displayedName)
+        {
+            try
+            {
+                return languages.First(language => language.DisplayedName == displayedName);
+            }
+            catch
+            {
+                throw new Exception($"No language found for displayed name {displayedName}.");
             }
         }
     }

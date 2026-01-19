@@ -17,6 +17,9 @@ namespace Localization
 
         public static LocalizationManager Instance => instance;
 
+        [SerializeField]
+        private LanguagesDropdown languagesDropdown;
+
         void Awake()
         {
             if (instance == null)
@@ -30,6 +33,22 @@ namespace Localization
             }
 
             LoadLocalizationContent();
+            if (languagesDropdown)
+            {
+                LoadLanguagesOptionsInDropdown();
+            }
+        }
+
+        void Update()
+        {
+            if (
+                languagesDropdown
+                && currentLanguage.DisplayedName != languagesDropdown.SelectedLanguage
+            )
+            {
+                SetCurrentLanguageBasedOnDisplayedName(languagesDropdown.SelectedLanguage);
+                LoadLocalizationContent();
+            }
         }
 
         private void LoadLocalizationContent()
@@ -77,6 +96,21 @@ namespace Localization
                     );
                 }
             }
+        }
+
+        public void LoadLanguagesOptionsInDropdown()
+        {
+            languagesDropdown.SetLanguageOptions(
+                localizationsList.LanguagesLists.GetLanguageDisplayedNames()
+            );
+        }
+
+        public void SetCurrentLanguageBasedOnDisplayedName(string displayedName)
+        {
+            LanguageDefinition languageDefinition =
+                localizationsList.LanguagesLists.GetLanguageBasedOnDisplayedName(displayedName);
+            currentLanguage = languageDefinition;
+            LoadLocalizationContent();
         }
     }
 }

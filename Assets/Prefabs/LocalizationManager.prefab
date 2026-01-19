@@ -45,4 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::Localization.LocalizationManager
   localizationsList: {fileID: 11400000, guid: b7cb4ce8b9ffa0c45b2387ad13d18532, type: 2}
-  currentLanguageCode: EN
+  currentLanguage:
+    code: EN
+    displayedName: English
+    readingDirection: 0
+    linkedUnityLanguage: 10
+  languagesDropdown: {fileID: 8948206656397803342, guid: 1ab42e8084ca61941ab565f1768c712d, type: 3}
