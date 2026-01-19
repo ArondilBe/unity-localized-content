@@ -69,6 +69,30 @@ namespace Test
         }
 
         [Test]
+        public void GetLanguageBasedOnLinkedUnityLanguageValueFound()
+        {
+            languagesList.Languages.Add(
+                new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
+            );
+            Assert.AreSame(
+                languagesList.GetLanguageBasedOnLinkedUnityLanguage(SystemLanguage.French),
+                languagesList.Languages[0]
+            );
+        }
+
+        [Test]
+        public void GetLanguageBasedOnLinkedUnityLanguageValueNotFound()
+        {
+            languagesList.Languages.Add(
+                new("FR", "Français", EReadingDirection.LeftToRight, SystemLanguage.French)
+            );
+            Assert.Throws<System.Exception>(() =>
+            {
+                languagesList.GetLanguageBasedOnDisplayedName("English");
+            });
+        }
+
+        [Test]
         public void GetLanguageCodesLanguagesFound()
         {
             languagesList.Languages.Add(
