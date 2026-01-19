@@ -40,6 +40,13 @@ namespace Localization
                 LoadLanguagesOptionsInDropdown();
             }
 
+            SetCurrentLanguageFromSystemLanguage();
+
+            LoadLocalizationContent();
+        }
+
+        private void SetCurrentLanguageFromSystemLanguage()
+        {
             try
             {
                 currentLanguage =
@@ -53,13 +60,20 @@ namespace Localization
                     $"Default language for system language {Application.systemLanguage} not found in languages list. Falling back to {fallbackLanguage.DisplayedName}."
                 );
                 currentLanguage = fallbackLanguage;
-                if (languagesDropdown)
+            }
+            if (languagesDropdown)
+            {
+                try
                 {
                     languagesDropdown.SetSelectedLanguage(currentLanguage.DisplayedName);
                 }
+                catch (Exception exception)
+                {
+                    Debug.LogWarning(
+                        $"Could not set fallback language {fallbackLanguage.DisplayedName} in dropdown: {exception.Message}"
+                    );
+                }
             }
-
-            LoadLocalizationContent();
         }
 
         void Update()
@@ -121,14 +135,14 @@ namespace Localization
             }
         }
 
-        public void LoadLanguagesOptionsInDropdown()
+        private void LoadLanguagesOptionsInDropdown()
         {
             languagesDropdown.SetLanguageOptions(
                 localizationsList.LanguagesLists.GetLanguageDisplayedNames()
             );
         }
 
-        public void SetCurrentLanguageBasedOnDisplayedName(string displayedName)
+        private void SetCurrentLanguageBasedOnDisplayedName(string displayedName)
         {
             LanguageDefinition languageDefinition =
                 localizationsList.LanguagesLists.GetLanguageBasedOnDisplayedName(displayedName);
