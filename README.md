@@ -13,6 +13,8 @@
 
 ## About this package
 
+**⚠ This project is ARCHIVED!**
+
 Unity package to handle localized content made by **[ArondilBe(arondilbe@gmail.com)](https://github.com/ArondilBe)**. The content of this package allows to create a dynamic languages list which then can be used to create localized entries list.
 
 ## The languages list

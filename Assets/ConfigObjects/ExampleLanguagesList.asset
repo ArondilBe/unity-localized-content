@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ExampleLanguagesList
   m_EditorClassIdentifier: Assembly-CSharp::Language.LanguagesList
   languages:
-  - code: FR
-    displayedName: "Fran\xE7ais"
-    readingDirection: 0
-    linkedUnityLanguage: 14
   - code: EN
     displayedName: English
     readingDirection: 0
     linkedUnityLanguage: 10
+  - code: FR
+    displayedName: "Fran\xE7ais"
+    readingDirection: 0
+    linkedUnityLanguage: 14
